@@ -1,0 +1,3 @@
+#+TITLE: org-krita
+
+Working with krita notes, sketches etc. in org mode.
