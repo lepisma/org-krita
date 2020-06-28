@@ -1,3 +1,5 @@
 #+TITLE: org-krita
 
-Working with krita notes, sketches etc. in org mode.
+Minor mode for working with [[https://krita.org/en/][krita]] notes, sketches etc. in org mode.
+
+[[file:./screen.gif]]
