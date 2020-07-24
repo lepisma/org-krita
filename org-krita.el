@@ -29,7 +29,7 @@
 
 ;;; Code:
 
-(require 'archive-mode)
+(require 'arc-mode)
 (require 'filenotify)
 (require 'f)
 (require 'cl-lib)
