@@ -7,5 +7,7 @@
 (package-file "org-krita.el")
 (files "*.el" ("resources" "resources/*"))
 
+(depends-on "f")
+
 (development
  (depends-on "buttercup"))

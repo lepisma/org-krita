@@ -4,7 +4,7 @@
 
 ;; Author: Abhinav Tushar <abhinav@lepisma.xyz>
 ;; Version: 0.1.0
-;; Package-Requires: ((emacs "26"))
+;; Package-Requires: ((emacs "26") (f "0.20.0"))
 ;; URL: https://github.com/lepisma/org-krita
 
 ;;; Commentary:
