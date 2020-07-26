@@ -1,5 +1,30 @@
 #+TITLE: org-krita
 
+[[tag][file:https://img.shields.io/github/v/tag/lepisma/org-krita.svg]]
+
 Minor mode for working with [[https://krita.org/en/][krita]] notes, sketches etc. in org mode.
 
 [[file:./screen.gif]]
+
+** Quickstart
+The package is not on melpa yet. For installing, I would recommend downloading
+the release tarballs from [[https://github.com/lepisma/org-krita/releases][here]].
+
+=org-krita= creates a new org link type called =krita= that:
+- when clicked on, opens krita for editing the file linked, and
+- shows the updated image preview inline if =org-krita-mode= is enabled.
+
+For using, you need to enable the minor mode =org-krita-mode= in org buffer with
+=krita= links like this =[[krita:./some-file.kra][image]]=. To create new files
+within the buffer itself, try calling =org-krita-insert-new-image=.
+
+** Roadmap
+Here are the directions that need work (as far as I can think of right now):
+1. Making the package tool agnostic. This basically means abstracting out the
+   following pieces that are tuned to krita at the moment:
+   1. Function for creating new image in the tool's format.
+   2. Function for extracting =png= from the file for inline display.
+   3. Function for running the program to edit an image.
+2. Better inline display. Right now we bypass org's inline display which means
+   we miss out on basic things like setting width and height for larger images
+   and other goodies.
