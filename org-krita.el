@@ -45,8 +45,21 @@
 (defvar-local org-krita-overlays nil
   "A-list mapping file names to overlay.")
 
+(defconst org-krita-dir (file-name-directory load-file-name)
+  "Base directory for package.")
+
+(defun org-krita-resource (file)
+  "Return full path of a resource FILE."
+  (expand-file-name file (file-name-as-directory (concat org-krita-dir "resources"))))
+
 (defun org-krita-export (_path _desc _backend)
   (error "Krita export not implemented yet."))
+
+(defun org-krita-make-new-image (output-kra-path &optional width height)
+  "Create a new image based on a template at OUTPUT-KRA-PATH."
+  (let ((template (org-krita-resource "template.kra")))
+    ;; TODO: Change image width and height based on provided argument
+    (f-copy template output-kra-path)))
 
 (defun org-krita-extract-png (kra-path)
   "Extract png from given KRA-PATH and return data."
@@ -118,6 +131,15 @@ If FULL-MODE is not null, run full krita."
     (file-notify-rm-watch (cdr watcher)))
   (setq org-krita-watchers nil)
   (org-krita-hide-all))
+
+;;;###autoload
+(defun org-krita-insert-new-image (output-kra-path link-name)
+  "Insert new image in current buffer."
+  (interactive "F\nsLink Name: ")
+  (org-krita-make-new-image output-kra-path)
+  (org-insert-link nil (concat "krita:" output-kra-path) link-name)
+  ;; TODO: Enable only the new image
+  (org-krita-enable))
 
 ;;;###autoload
 (define-minor-mode org-krita-mode
