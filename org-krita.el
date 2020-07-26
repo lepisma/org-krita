@@ -3,7 +3,7 @@
 ;; Copyright (c) 2020 Abhinav Tushar
 
 ;; Author: Abhinav Tushar <abhinav@lepisma.xyz>
-;; Version: 0.1.0
+;; Version: 0.1.1
 ;; Package-Requires: ((emacs "26") (f "0.20.0"))
 ;; URL: https://github.com/lepisma/org-krita
 
