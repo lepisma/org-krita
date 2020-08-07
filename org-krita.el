@@ -144,7 +144,7 @@ If FULL-MODE is not null, run full krita."
 ;;;###autoload
 (define-minor-mode org-krita-mode
   "Mode for displaying editable krita images within Org file."
-  :initial-value nil
+  :init-value nil
   (if org-krita-mode (org-krita-enable) (org-krita-disable)))
 
 (provide 'org-krita)
