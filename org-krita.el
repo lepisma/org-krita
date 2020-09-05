@@ -47,6 +47,19 @@
 (defcustom org-krita-append-ext-kra t
   "Append automatically .kra extension."
   :group 'org-krita
+  :type 'boolean
+  :package-version '(org-krita . "0.1.4"))
+
+(defcustom org-krita-get-new-filepath (lambda () (read-file-name "New krita file: "))
+  "Function returning filepath of new created image."
+  :group 'org-krita
+  :type 'function
+  :package-version '(org-krita . "0.1.4"))
+
+(defcustom org-krita-get-new-desc (lambda () (read-string "Description: "))
+  "Function returning description of new created image."
+  :group 'org-krita
+  :type 'function
   :package-version '(org-krita . "0.1.4"))
 
 (defvar-local org-krita-watchers nil
@@ -151,14 +164,16 @@ If FULL-MODE is not null, run full krita."
       path)))
 
 ;;;###autoload
-(defun org-krita-insert-new-image (output-kra-path link-name)
+(defun org-krita-insert-new-image (output-kra-path desc)
   "Insert new image in current buffer."
-  (interactive "FNew krita file: \nsLink Name: ")
-  (let ((output-kra-path (org-krita-validate-path output-kra-path)))
-    (org-krita-make-new-image output-kra-path)
-    (org-insert-link nil (concat "krita:" output-kra-path) link-name)
-    ;; TODO: Enable only the new image
-    (org-krita-enable)))
+  (interactive
+   (let ((output-kra-path (funcall org-krita-get-new-filepath))
+         (desc (funcall org-krita-get-new-desc)))
+     (list (org-krita-validate-path output-kra-path) desc)))
+  (org-krita-make-new-image output-kra-path)
+  (org-insert-link nil (concat "krita:" output-kra-path) desc)
+  ;; TODO: Enable only the new image
+  (org-krita-enable))
 
 ;;;###autoload
 (define-minor-mode org-krita-mode
