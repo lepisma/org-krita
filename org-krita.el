@@ -132,14 +132,24 @@ If FULL-MODE is not null, run full krita."
   (setq org-krita-watchers nil)
   (org-krita-hide-all))
 
+(defun org-krita-validate-path (path)
+  "Validate the file PATH as a krita path after confirming from
+the user."
+  (if (f-ext-p path "kra")
+      path
+    (if (y-or-n-p "The file doesn't have .kra extension, do you want to add that automatically?")
+        (concat path ".kra")
+      path)))
+
 ;;;###autoload
 (defun org-krita-insert-new-image (output-kra-path link-name)
   "Insert new image in current buffer."
-  (interactive "F\nsLink Name: ")
-  (org-krita-make-new-image output-kra-path)
-  (org-insert-link nil (concat "krita:" output-kra-path) link-name)
-  ;; TODO: Enable only the new image
-  (org-krita-enable))
+  (interactive "FNew krita file: \nsLink Name: ")
+  (let ((output-kra-path (org-krita-validate-path output-kra-path)))
+    (org-krita-make-new-image output-kra-path)
+    (org-insert-link nil (concat "krita:" output-kra-path) link-name)
+    ;; TODO: Enable only the new image
+    (org-krita-enable)))
 
 ;;;###autoload
 (define-minor-mode org-krita-mode
