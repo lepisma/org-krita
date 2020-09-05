@@ -39,6 +39,16 @@
 
 ;; NOTE: Only single reference for a file supported as of now.
 
+(defgroup org-krita nil
+  "Org-krita customization."
+  :group 'org
+  :package-version '(org-krita . "0.1.4"))
+
+(defcustom org-krita-append-ext-kra t
+  "Append automatically .kra extension."
+  :group 'org-krita
+  :package-version '(org-krita . "0.1.4"))
+
 (defvar-local org-krita-watchers nil
   "A-list mapping file names to change watcher descriptors.")
 
@@ -133,11 +143,10 @@ If FULL-MODE is not null, run full krita."
   (org-krita-hide-all))
 
 (defun org-krita-validate-path (path)
-  "Validate the file PATH as a krita path after confirming from
-the user."
+  "Validate the file PATH as a krita path."
   (if (f-ext-p path "kra")
       path
-    (if (y-or-n-p "The file doesn't have .kra extension, do you want to add that automatically?")
+    (if org-krita-append-ext-kra
         (concat path ".kra")
       path)))
 
