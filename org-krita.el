@@ -4,7 +4,7 @@
 
 ;; Author: Abhinav Tushar <abhinav@lepisma.xyz>
 ;; Version: 0.1.1
-;; Package-Requires: ((emacs "26") (f "0.20.0"))
+;; Package-Requires: ((emacs "26") (f "0.20.0") (org "9.3"))
 ;; URL: https://github.com/lepisma/org-krita
 
 ;;; Commentary:
@@ -35,7 +35,7 @@
 (require 'cl-lib)
 (require 'org)
 
-(org-add-link-type "krita" #'org-krita-edit #'org-krita-export)
+(org-link-set-parameters "krita" :follow #'org-krita-edit :export #'org-krita-export)
 
 ;; NOTE: Only single reference for a file supported as of now.
 
