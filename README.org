@@ -8,7 +8,16 @@ Minor mode for working with [[https://krita.org/en/][krita]] notes, sketches etc
 
 ** Quickstart
 The package is not on melpa yet. For installing, I would recommend downloading
-the release tarballs from [[https://github.com/lepisma/org-krita/releases][here]].
+the release tarballs from [[https://github.com/lepisma/org-krita/releases][here]]. Or if you are using [[https://github.com/quelpa/quelpa-use-package][quelpa-use-package]], you can
+do the following:
+
+#+begin_src emacs-lisp
+  (use-package org-krita
+    :ensure t
+    :quelpa (org-krita :fetcher github :repo "lepisma/org-krita" :files ("*.el" "resources"))
+    :config
+    (add-hook 'org-mode-hook 'org-krita-mode))
+#+end_src
 
 =org-krita= creates a new org link type called =krita= that:
 - when clicked on, opens krita for editing the file linked, and
