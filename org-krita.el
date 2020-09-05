@@ -93,11 +93,11 @@
     (unless (alist-get kra-path org-krita-watchers nil nil #'string-equal)
       (push (cons kra-path desc) org-krita-watchers))))
 
-(defun org-krita-edit (png-path &optional full-mode)
-  "Edit given PNG-PATH in krita canvasonly mode.
+(defun org-krita-edit (path &optional full-mode)
+  "Edit given PATH in krita canvasonly mode.
 
 If FULL-MODE is not null, run full krita."
-  (let ((kra-path (expand-file-name (f-swap-ext png-path "kra"))))
+  (let ((kra-path (expand-file-name path)))
     (when (f-exists-p kra-path)
       (if full-mode
           (call-process "krita" nil 0 nil kra-path)
