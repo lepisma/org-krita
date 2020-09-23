@@ -19,6 +19,21 @@ do the following:
     (add-hook 'org-mode-hook 'org-krita-mode))
 #+end_src
 
+Or, if you are using Doom emacs you can add this to your =packages.el=:
+#+begin_src emacs-lisp
+(package! org-krita
+  :recipe (:host github
+           :repo "lepisma/org-krita"
+           :files ("resources" "resources" "*.el" "*.el")))
+#+end_src
+
+and this to your =config.el=:
+#+begin_src emacs-lisp
+(use-package! org-krita
+  :config
+  (add-hook 'org-mode-hook 'org-krita-mode))
+#+end_src
+
 =org-krita= creates a new org link type called =krita= that:
 - when clicked on, opens krita for editing the file linked, and
 - shows the updated image preview inline if =org-krita-mode= is enabled.
