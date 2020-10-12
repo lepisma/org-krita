@@ -65,7 +65,7 @@
   "Extract png from given KRA-PATH and return data."
   (with-temp-buffer
     (set-buffer-multibyte nil)
-    (archive-zip-extract kra-path "mergedimage.png")
+    (archive-zip-extract (expand-file-name kra-path) "mergedimage.png")
     (buffer-string)))
 
 (defun org-krita-get-links ()
