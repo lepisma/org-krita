@@ -53,7 +53,25 @@
   (expand-file-name file (file-name-as-directory (concat org-krita-dir "resources"))))
 
 (defun org-krita-export (_path _desc _backend)
-  (error "Krita export not implemented yet."))
+  "Export krita canvas _PATH from Org files.
+Argument _DESC refers to link description.
+Argument _BACKEND refers to export backend."
+  (let ((png-path (f-swap-ext _path "png")))
+    (cl-case _backend
+      (html (format "<img src=\"%s\">"
+                    (prog1 png-path
+                      (org-krita-save-image _path png-path))))
+      (ascii (format "%s (%s)" (or _desc _path) _path))
+      (latex (format "\\includegraphics[width=\\textheight,height=\\textwidth,keepaspectratio]{%s}"
+                     (prog1 png-path
+                       (org-krita-save-image _path png-path)))))))
+
+(defun org-krita-save-image (kra-path png-path)
+  "Extract from KRA-PATH a .png and write it to PNG-PATH."
+  (let ((image (create-image (org-krita-extract-png kra-path) 'png t)))
+    (with-temp-buffer
+      (insert (plist-get (cdr image) :data))
+      (write-region (point-min) (point-max) png-path))))
 
 (defun org-krita-make-new-image (output-kra-path &optional width height)
   "Create a new image based on a template at OUTPUT-KRA-PATH."
