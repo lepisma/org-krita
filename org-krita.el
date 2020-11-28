@@ -3,7 +3,7 @@
 ;; Copyright (c) 2020 Abhinav Tushar
 
 ;; Author: Abhinav Tushar <abhinav@lepisma.xyz>
-;; Version: 0.1.4
+;; Version: 0.2.0
 ;; Package-Requires: ((emacs "26") (f "0.20.0") (org "9.3"))
 ;; URL: https://github.com/lepisma/org-krita
 
@@ -42,25 +42,25 @@
 (defgroup org-krita nil
   "Org-krita customization."
   :group 'org
-  :package-version '(org-krita . "0.1.4"))
+  :package-version '(org-krita . "0.2.0"))
 
 (defcustom org-krita-append-ext-kra t
   "Append automatically .kra extension."
   :group 'org-krita
   :type 'boolean
-  :package-version '(org-krita . "0.1.4"))
+  :package-version '(org-krita . "0.2.0"))
 
 (defcustom org-krita-get-new-filepath (lambda () (read-file-name "New krita file: "))
   "Function returning filepath of new created image."
   :group 'org-krita
   :type 'function
-  :package-version '(org-krita . "0.1.4"))
+  :package-version '(org-krita . "0.2.0"))
 
 (defcustom org-krita-get-new-desc (lambda () (read-string "Description: "))
   "Function returning description of new created image."
   :group 'org-krita
   :type 'function
-  :package-version '(org-krita . "0.1.4"))
+  :package-version '(org-krita . "0.2.0"))
 
 (defvar-local org-krita-watchers nil
   "A-list mapping file names to change watcher descriptors.")
