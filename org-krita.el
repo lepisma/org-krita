@@ -138,11 +138,17 @@ Argument _BACKEND refers to export backend."
   "Edit given PATH in krita canvasonly mode.
 
 If FULL-MODE is not null, run full krita."
-  (let ((kra-path (expand-file-name path)))
+  (let* ((kra-path (expand-file-name path))
+         (extension (file-name-extension kra-path)))
     (when (f-exists-p kra-path)
-      (if full-mode
-          (call-process "krita" nil 0 nil kra-path)
-        (call-process "krita" nil 0 nil "--canvasonly" "--nosplash" kra-path))
+      (cond ((string= extension "kra")
+             (if full-mode
+                 (call-process "krita" nil 0 nil kra-path)
+               (call-process "krita" nil 0 nil "--canvasonly" "--nosplash" kra-path)))
+            ((string= extension "ora")
+             (call-process "mypaint" nil 0 nil kra-path))
+            (t (error "Extension %s not supported" extension)))
+
       (org-krita-add-watcher kra-path))))
 
 (defun org-krita-hide-link (link)
@@ -175,7 +181,8 @@ If FULL-MODE is not null, run full krita."
 
 (defun org-krita-validate-path (path)
   "Validate the file PATH as a krita path."
-  (if (f-ext-p path "kra")
+  (if (or (f-ext-p path "kra")
+          (f-ext-p path "ora"))
       path
     (if org-krita-append-ext-kra
         (concat path ".kra")
