@@ -49,7 +49,7 @@
   :type 'string
   :safe #'stringp
   :group 'org-krita
-  :package-version '(org-krita . "0.2.0"))
+  :package-version '(org-krita . "0.2.1"))
 
 (defcustom org-krita-append-ext-kra t
   "Append automatically .kra extension."
