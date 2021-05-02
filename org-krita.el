@@ -44,6 +44,13 @@
   :group 'org
   :package-version '(org-krita . "0.2.0"))
 
+(defcustom org-krita-executable "krita"
+  "The command of krita or full path to executable."
+  :type 'string
+  :safe #'stringp
+  :group 'org-krita
+  :package-version '(org-krita . "0.2.0"))
+
 (defcustom org-krita-append-ext-kra t
   "Append automatically .kra extension."
   :group 'org-krita
@@ -141,8 +148,8 @@ If FULL-MODE is not null, run full krita."
   (let ((kra-path (expand-file-name path)))
     (when (f-exists-p kra-path)
       (if full-mode
-          (call-process "krita" nil 0 nil kra-path)
-        (call-process "krita" nil 0 nil "--canvasonly" "--nosplash" kra-path))
+          (call-process org-krita-executable nil 0 nil kra-path)
+        (call-process org-krita-executable nil 0 nil "--canvasonly" "--nosplash" kra-path))
       (org-krita-add-watcher kra-path))))
 
 (defun org-krita-hide-link (link)
