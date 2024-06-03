@@ -1,5 +1,13 @@
 #+TITLE: org-krita
 
+# fork of lepisma's org-krita package
+used `:image-data-fun` attribute of org-link-parameter instead of "bypassing org-mode's image display. This approach is used also by github.com/wdavew/org-excalidraw
+
+This way:
++ krita links' image display goes with org-inline-image-display
++ in the bypassing version of org-krita you can always see a blue line in the middle of image, which is gone when you have your cursor on it which I think is the underline under link. It is gone now.
++ set width with `#+attr_html: :width 100`
+
 [[tag][file:https://img.shields.io/github/v/tag/lepisma/org-krita.svg]]
 
 Minor mode for working with [[https://krita.org/en/][krita]] notes, sketches etc. in org mode.
