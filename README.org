@@ -1,6 +1,6 @@
 #+TITLE: org-krita
 
-# fork of lepisma's org-krita package
+** fork of lepisma's org-krita package
 used `:image-data-fun` attribute of org-link-parameter instead of "bypassing org-mode's image display. This approach is used also by github.com/wdavew/org-excalidraw
 
 This way:
