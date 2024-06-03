@@ -22,7 +22,7 @@ do the following:
 #+begin_src emacs-lisp
   (use-package org-krita
     :ensure t
-    :quelpa (org-krita :fetcher github :repo "lepisma/org-krita" :files ("*.el" "resources"))
+    :quelpa (org-krita :fetcher github :repo "hermanhel/org-krita" :files ("*.el" "resources"))
     :config
     (add-hook 'org-mode-hook 'org-krita-mode))
 #+end_src
@@ -31,32 +31,13 @@ Or, if you are using Doom emacs you can add this to your =packages.el=:
 #+begin_src emacs-lisp
 (package! org-krita
   :recipe (:host github
-           :repo "lepisma/org-krita"
+           :repo "hermanhel/org-krita"
            :files ("resources" "resources" "*.el" "*.el")))
-#+end_src
-
-and this to your =config.el=:
-#+begin_src emacs-lisp
-(use-package! org-krita
-  :config
-  (add-hook 'org-mode-hook 'org-krita-mode))
 #+end_src
 
 =org-krita= creates a new org link type called =krita= that:
 - when clicked on, opens krita for editing the file linked, and
-- shows the updated image preview inline if =org-krita-mode= is enabled.
+- shows the updated image preview inline if call =org-display-inline-images=
 
-For using, you need to enable the minor mode =org-krita-mode= in org buffer with
-=krita= links like this =[[krita:./some-file.kra][image]]=. To create new files
+To create new files
 within the buffer itself, try calling =org-krita-insert-new-image=.
-
-** Roadmap
-Here are the directions that need work (as far as I can think of right now):
-1. Making the package tool agnostic. This basically means abstracting out the
-   following pieces that are tuned to krita at the moment:
-   1. Function for creating new image in the tool's format.
-   2. Function for extracting =png= from the file for inline display.
-   3. Function for running the program to edit an image.
-2. Better inline display. Right now we bypass org's inline display which means
-   we miss out on basic things like setting width and height for larger images
-   and other goodies.
