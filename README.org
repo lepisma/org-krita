@@ -2,7 +2,8 @@
 
 [[tag][file:https://img.shields.io/github/v/tag/lepisma/org-krita.svg]]
 
-Minor mode for working with [[https://krita.org/en/][krita]] notes, sketches etc. in org mode.
+Minor mode for working with [[https://krita.org/en/][krita]] (and [[https://mypaint.app/][MyPaint]]) notes, sketches etc. in org
+mode.
 
 [[file:./screen.gif]]
 
@@ -41,6 +42,9 @@ and this to your =config.el=:
 For using, you need to enable the minor mode =org-krita-mode= in org buffer with
 =krita= links like this =[[krita:./some-file.kra][image]]=. To create new files
 within the buffer itself, try calling =org-krita-insert-new-image=.
+
+This also supports ~.ora~ files from MyPaint while displaying and editing. But new
+image insertion only works for ~.kra~ files.
 
 ** Roadmap
 Here are the directions that need work (as far as I can think of right now):
