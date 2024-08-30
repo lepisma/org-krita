@@ -146,11 +146,12 @@ Argument _BACKEND refers to export backend."
 
 If FULL-MODE is not null, run full krita."
   (let ((kra-path (expand-file-name path)))
-    (if (f-exists-p kra-path) () (org-krita-make-new-image kra-path))
-      (if full-mode
-          (call-process org-krita-executable nil 0 nil kra-path)
-        (call-process org-krita-executable nil 0 nil "--canvasonly" "--nosplash" kra-path))
-      (org-krita-add-watcher kra-path)))
+    (unless (f-exists-p kra-path)
+      (org-krita-make-new-image kra-path))
+    (if full-mode
+        (call-process org-krita-executable nil 0 nil kra-path)
+      (call-process org-krita-executable nil 0 nil "--canvasonly" "--nosplash" kra-path))
+    (org-krita-add-watcher kra-path)))
 
 (defun org-krita-hide-link (link)
   (let ((overlay (alist-get (org-element-property :path link) org-krita-overlays nil nil #'string-equal)))
