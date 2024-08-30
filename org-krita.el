@@ -35,7 +35,14 @@
 (require 'cl-lib)
 (require 'org)
 
-(org-link-set-parameters "krita" :follow #'org-krita-edit :export #'org-krita-export)
+(defun org-krita-image-data-fun (_protocol link _desc)
+                                           (with-temp-buffer 
+                                              (set-buffer-multibyte nil)
+                                              (archive-zip-extract (expand-file-name link) "mergedimage.png")
+                                              (buffer-string)
+                                              ))
+
+(org-link-set-parameters "krita" :follow #'org-krita-edit :export #'org-krita-export :image-data-fun #'org-krita-image-data-fun)
 
 ;; NOTE: Only single reference for a file supported as of now.
 
@@ -201,10 +208,10 @@ If FULL-MODE is not null, run full krita."
   (org-krita-enable))
 
 ;;;###autoload
-(define-minor-mode org-krita-mode
-  "Mode for displaying editable krita images within Org file."
-  :init-value nil
-  (if org-krita-mode (org-krita-enable) (org-krita-disable)))
+;;(define-minor-mode org-krita-mode
+;;  "Mode for displaying editable krita images within Org file."
+;;  :init-value nil
+;;  (if org-krita-mode (org-krita-enable) (org-krita-disable)))
 
 (provide 'org-krita)
 
